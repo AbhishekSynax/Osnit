@@ -99,10 +99,10 @@ INSTAGRAM_SEARCH_IMAGE = "https://i.ibb.co/bjBWTR9f/Picsart-26-01-13-13-14-14-77
 INSTAGRAM_REEL_IMAGE = "https://i.ibb.co/zTP1JS1F/file-0000000075c47209ab090a68d4b985c2.png"  # Image for Instagram Reel Downloader
 FREEFIRE_SEARCH_IMAGE = "https://i.ibb.co/Q3r3pf2Q/Picsart-26-01-13-12-58-22-693.jpg"  # Image for Free Fire search
 TEXT_TO_VOICE_IMAGE = "https://i.ibb.co/bgmR332v/file-0000000063d07206a5b74d72573170d7.png"  # Image for Text to Voice
-YOUTUBE_SEARCH_IMAGE = "https://i.ibb.co/cSV8Z7Cg/file-0000000028b47208bbbd1c5150d14056.png"  # Image for YouTube Downloader
+YOUTUBE_SEARCH_IMAGE = "https://i.ibb.co/rR3Prhqs/file-00000000509c71fd95db30c2f2e988f6.png"  # Image for YouTube Downloader
 JOIN_IMAGE = "https://i.ibb.co/sdrfRLJd/file-00000000cb987208926a77979a9c0338.png"  # Image for join channel screen
 MAINTENANCE_IMAGE = "https://i.ibb.co/twKv01yL/71-Ugwa-C4-Dj-L-AC-UF1000-1000-QL80.jpg"  # Maintenance mode image
-GST_SEARCH_IMAGE = "https://i.ibb.co/cSV8Z7Cg/file-0000000028b47208bbbd1c5150d14056.png"  # Image for GST Number Lookup
+GST_SEARCH_IMAGE = "https://i.ibb.co/W4gzyjWq/file-00000000832c71f89eced99428ebf79b.png"  # Image for GST Number Lookup
 
 # Force Join Channels (Hardcoded) - CHANGE THESE TO YOUR CHANNELS
 FORCE_JOIN_CHANNELS = [

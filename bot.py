@@ -37,9 +37,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ================= CONFIG =================
-BOT_TOKEN = "8400631140:AAG4PYOa-fFSoahTPx2LP_FR98mmx2TvVJA"
+BOT_TOKEN = "7980795364:AAHNkqreu-ni7hPU_vaWxrYVQXmRaFx7q4E"
 ADMIN_ID = 7998441787
-BOT_USERNAME = "SynaxLookupBot"  # Replace with your bot username
+BOT_USERNAME = "SynaxOsnitBot"  # Replace with your bot username
 
 # File paths
 USERS_FILE = "users.json"
@@ -104,6 +104,7 @@ YOUTUBE_SEARCH_IMAGE = "https://i.ibb.co/rR3Prhqs/file-00000000509c71fd95db30c2f
 JOIN_IMAGE = "https://i.ibb.co/sdrfRLJd/file-00000000cb987208926a77979a9c0338.png"  # Image for join channel screen
 MAINTENANCE_IMAGE = "https://i.ibb.co/twKv01yL/71-Ugwa-C4-Dj-L-AC-UF1000-1000-QL80.jpg"  # Maintenance mode image
 GST_SEARCH_IMAGE = "https://i.ibb.co/W4gzyjWq/file-00000000832c71f89eced99428ebf79b.png"  # Image for GST Number Lookup
+STYLISH_TEXT_IMAGE = "https://i.ibb.co/gFttkZyy/file-000000009f2c7209b00cf7aecaa187a6-1.png"  # Image for Stylish Text Generator
 
 # Force Join Channels (Hardcoded) - CHANGE THESE TO YOUR CHANNELS
 FORCE_JOIN_CHANNELS = [
@@ -119,6 +120,87 @@ COUPON_GEN_DETAILS = range(1)  # For advanced coupon generation
 FACE_SWAP_SOURCE, FACE_SWAP_TARGET = range(2)  # For face swap conversation
 CREDIT_COST_EDIT = range(1)  # For editing credit costs
 BAN_USER, BAN_REASON = range(2)  # For banning users
+STYLISH_TEXT_MODE = range(1)  # For stylish text generation mode
+
+# ==========================================
+
+# ================= STYLISH TEXT GENERATOR =================
+# Font mapping for stylish text
+FONT_MAP = {
+    "a":"ᴧ","b":"ʙ","c":"ᴄ","d":"ᴅ","e":"є","f":"ғ","g":"ɢ","h":"ʜ","i":"ɪ",
+    "j":"ᴊ","k":"ᴋ","l":"ʟ","m":"ϻ","n":"η","o":"σ","p":"ᴘ","q":"ǫ","r":"ꝛ",
+    "s":"s","t":"ᴛ","u":"υ","v":"ᴠ","w":"ᴡ","x":"x","y":"ʏ","z":"ᴢ",
+    
+    "A":"𝐀‌","B":"𝐁‌","C":"𝐂‌","D":"𝐃‌","E":"𝐄‌","F":"𝐅‌","G":"𝐆‌",
+    "H":"𝐇‌","I":"𝐈‌","J":"𝐉‌","K":"𝐊‌","L":"𝐋‌","M":"𝐌‌","N":"𝐍‌",
+    "O":"𝐎‌","P":"𝐏‌","Q":"𝐐‌","R":"𝐑‌","S":"𝐒‌","T":"𝐓‌","U":"𝐔‌",
+    "V":"𝐕‌","W":"𝐖‌","X":"𝐗‌","Y":"𝐘‌","Z":"𝐙‌",
+}
+
+def convert_to_stylish(text: str) -> str:
+    """Convert text to stylish font using FONT_MAP"""
+    return "".join(FONT_MAP.get(ch, ch) for ch in text)
+
+# List of style pairs (prefix, suffix) - All styles from the provided code
+STYLES = [
+    ("𓂃❛ ⟶", "❜ 🌙⤹🌸"),
+    ("❍⏤●", "●───♫▷"),
+    ("🤍 ⍣⃪ ᶦ ᵃᵐ⛦⃕", "❛𝆺𝅥⤹࿗𓆪ꪾ™"),
+    ("𓆰𝅃🔥", "⃪⍣꯭꯭𓆪꯭🝐"),
+    ("◄❥❥⃝⃪⃕🦚⟵᷽᷍", "˚◡⃝🐬᪳𔘓❁❍•:➛"),
+    ("➺꯭꯭꯭𝅥𝆬🦋⃪꯭─⃛┼", "🥵⃝⃝ᬽ⃪꯭꯭➺꯭⎯⎯᪵᪳"),
+    ("◄⏤🝛꯭𝐈𝛕ᷟ𝚣⃪ꙴ🥀⃝⃪", "⃝☠⎯꯭𓆩♡꧂"),
+    ("🦋⃟≛⃝⋆⋆≛⃞", "𝄟🦋⃟≛⃝≛"),
+    ("𐏓𓆩❤🔥𓆪𝆺꯭𝅥༎ࠫ⛧", "ࠫ༎𝆺𝅥𓆩⍣꯭⃟🍷༎᪵⛧"),
+    ("𓄂𝆺𝅥⃝🥀⃪⃪꯭ᷟ⃜𖥫꯭꯭꯭𝆺꯭꯭𝅥", "𝆺꯭𝅥🎭🌹꯭"),
+    ("𓄂─⃛𓆩🫧𝆺𝅥⃝𐏓", "㋛𓆪꯭⵿٭🍃"),
+    ("◄⏤⃪⃝⃪𐏓🝛꯭", "⸙ꠋꠋꠋꠋꠋ⛦⃪⃪🝛꯭••➤"),
+    ("🎡𓆩᪵🌸⃝۫𝞄⃕𝖋𝖋꯭ᜊ𝆺𝅥⃝", "┼⃖ꭗ🦋¦🌺--🎋"),
+    ("⛦⃕𝄟•๋๋๋๋๋๋๋๋๋๋๋๋๋๋🦋⃟⃟⃟≛⃝💖", "🦋•๋๋๋๋๋๋๋๋๋๋๋๋๋๋𝄟"),
+    ("••ᯓ❥๋๋๋๋๋๋๋๋๋๋๋๋ꗝ༎꯭ࠫ🤍𝆺꯭𝅥", "𝆺꯭𝅥༎ࠫ◡⃝𑲭"),
+    ("𝐈𝛕ᷟ𝚣⃪ꙴ⋆†།┼⃖•🔥⃞⃪⃜", "🔥⃞⃪⃜𓆪🦋✿"),
+    ("❍─⃜𓆩〭⃛〬🤍𓆪˹", ".⍣⃪ꭗ𝆺𝅥𔘓🪽"),
+    ("𝆺𝅥اـ꯭ـ꯭𝞂⃕𝝲𝝴꯭•⚚•𝆺꯭𝅥", "𝆺꯭𝅥ꀭ‧₊𝁾⟶🍃˚"),
+    ("◄⏤🔥⃝⃪🐼𓆩꯭❛", "❜꯭𓆪⎯⟶"),
+    ("❍─⃜𓆩〭⃛〬👒𓆪⃪꯭", "🤍᪳𝆺꯭𝅥⎯⎯"),
+    ("◄⏤❥≛⃝", "🍁⃝➤🕊⃝🝐"),
+    ("°ꗝؖ༎꯭ࠫᜊ𝆺꯭𝅥🔥⃝❥༎ࠫ𝆺꯭𝅥", "༎ࠫ٭⃪꯭꯭⃜ꬑ�"),
+    ("◄⏤🫧⃝⃪🦋꯭", "◡⃝ا۬🌸᪳𝆺꯭𝅥⎯꯭"),
+    ("◄ᯓ❥≛⃝🌸꯭", "💗⃝꯭꯭❥꯭꯭✿꯭꯭࿐"),
+    ("❝ .𝁘ໍ ", "🍷𐏓𝟑 ༗ آ‌⃖𝄤𝅃"),
+    ("𓍼 ໋݊ ", " ⌯ ™| 💗"),
+    ("𝄟🦋⃟≛⃝ ", "🦋⃟❤"),
+    ("ᯓ𓆰 𝅃꯭꯭꯭꯭꯭❛-", "-֟፝…𓆪᭄ꪾ"),
+    ("⛦⃕𝄟•๋๋๋๋๋๋🦋⃟⃟⃟≛⃝💖", "🦋•๋๋๋๋๋๋𝄟⛦⃕"),
+    ("𓆩🔥⃝⃪❥༎꯭ࠫ", "꯭༎ࠫ❥⃪⃝🔥𓆪"),
+    ("••ᯓ❥๋๋๋๋๋ꗝ༎꯭ࠫ🤍𝆺꯭𝅥", "𝆺꯭𝅥༎ࠫ◡⃝𑲭"),
+    ("𐏓𓆩❤🔥𓆪𝆺꯭𝅥༎ࠫ⛧", "⛧༎ࠫ𝆺꯭𝅥𓆩🍷𓆪"),
+    ("🎡𓆩᪵🌸⃝۫𝞄⃕𝖋𝖋꯭ᜊ𝆺𝅥⃝", "┼⃖ꭗ🦋¦🌺--🎋"),
+    ("𓄂𝆺𝅥⃝🥀⃪⃪꯭ᷟ⃜𖥫꯭꯭꯭𝆺꯭꯭𝅥", "𝆺꯭𝅥🎭🌹꯭"),
+    ("◄⏤⃪⃝⃪𐏓🝛꯭𝐈𝛕ᷟ𝚣ꙴ", "⸙ꠋꠋꠋꠋꠋ⛦⃪⃪🝛꯭"),
+    ("𓂃⃝💞⃪𓆩🦋⃟≛⃝", "⃝≛⃟🦋𓆪⃪💞⃝𓂃"),
+    ("❍─⃜𓆩〭⃛〬🤍𓆪˹", ".⍣⃪ꭗ𝆺𝅥𔘓🪽"),
+    ("𓆩🧿⃝🦋⃪⛦⃕", "⛦⃪⃕🦋⃝🧿𓆪"),
+    ("◄⏤🔥⃝⃪🐼𓆩꯭❛", "❜꯭𓆪🐼⃪⃝🔥⏤►"),
+    ("°ꗝؖ༎꯭ࠫᜊ𝆺꯭𝅥🔥⃝❥༎ࠫ𝆺꯭𝅥", "༎ࠫ٭⃪꯭꯭⃜ꬑ�"),
+    ("𓆰⃝🔥𝆺꯭꯭꯭𝅥𓆩❥", "❥𓆪꯭꯭꯭𝆺𝅥🔥⃝𓆰"),
+    ("◄ᯓ❥≛⃝🌸꯭", "💗⃝꯭꯭❥꯭꯭✿꯭꯭࿐"),
+    ("𓆩💀⃝🖤⃪☠", "☠⃪🖤⃝💀𓆪"),
+    ("⛧⃝🔥⃪𓆩👑", "👑𓆪⃪🔥⃝⛧"),
+    ("𓂀⃝🦋⃪⛦⃕💫", "💫⃕⛦⃪🦋⃝𓂀"),
+    ("◄⏤🎭⃝⃪𓆩", "𓆪⃪⃝🎭⏤►"),
+    ("𓆩⚡⃝🔥⃪💥", "💥⃪🔥⃝⚡𓆪"),
+    ("✦⃝💫⃪𓆩🌌", "🌌𓆪⃪💫⃝✦"),
+    ("𓆩🍷⃝✨⃪⛧", "⛧⃪✨⃝🍷𓆪"),
+    ("❛⃝🌑⃪𓆩☠", "☠𓆪⃪🌑⃝❛"),
+    ("◄ᯓ🖤⃝⃪💀", "💀⃪⃝🖤ᯓ►"),
+    ("𓆩🎀⃝💖⃪⛦", "⛦⃪💖⃝🎀𓆪"),
+    ("✧⃝🌺⃪𓆩🦋", "🦋𓆪⃪🌺⃝✧"),
+    ("𓆩🔥⃝⚔⃪👑", "👑⃪⚔⃝🔥𓆪"),
+    ("◄⏤🌪⃝⃪💫", "💫⃪⃝🌪⏤►"),
+    ("𓆩🕯⃝🌑⃪☠", "☠⃪🌑⃝🕯𓆪"),
+    ("⛦⃕⃝🔥⃪𓆩💎", "💎𓆪⃪🔥⃝⛦⃕"),
+]
 
 # ==========================================
 
@@ -181,7 +263,8 @@ def load_credit_costs() -> dict:
             "freefire_search": 2,  # Free Fire UID search
             "text_to_voice": 1,  # Text to Voice
             "youtube_download": 3,  # YouTube video download
-            "gst_search": 2  # GST Number Lookup
+            "gst_search": 2,  # GST Number Lookup
+            "stylish_text": 1  # Stylish Text Generator
         }
         save_credit_costs(costs)
     
@@ -245,7 +328,8 @@ def load_stats() -> dict:
                 "freefire_search": 0,
                 "text_to_voice": 0,
                 "youtube_download": 0,
-                "gst_search": 0
+                "gst_search": 0,
+                "stylish_text": 0
             },
             "daily_searches": {},
             "monthly_searches": {},
@@ -552,6 +636,8 @@ def clear_service_states(context: ContextTypes.DEFAULT_TYPE):
         "awaiting_text_to_voice",  # Added Text to Voice state
         "awaiting_youtube",  # Added YouTube state
         "awaiting_gst",  # Added GST state
+        "awaiting_stylish_text",  # Added Stylish Text state
+        "stylish_text_mode",  # Added for stylish text generation mode
         "ban_user_id", "ban_reason", "unban_user_id"
     ]
     
@@ -655,7 +741,8 @@ async def show_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("📞 Number to Name", callback_data="num_name_search"),InlineKeyboardButton("📷 Instagram Info", callback_data="instagram_search")],
         [InlineKeyboardButton("🎵 Spotify Music", callback_data="spotify_menu"),InlineKeyboardButton("🔥 Free Fire Info", callback_data="freefire_search")],
         [InlineKeyboardButton("📹 Instagram Reel DL", callback_data="instagram_reel_download"),InlineKeyboardButton("🔊 Text to Voice", callback_data="text_to_voice")],
-        [InlineKeyboardButton("📺 YouTube Downloader", callback_data="youtube_download"),InlineKeyboardButton("🧾 GST Number Lookup", callback_data="gst_search")]
+        [InlineKeyboardButton("📺 YouTube Downloader", callback_data="youtube_download"),InlineKeyboardButton("🧾 GST Number Lookup", callback_data="gst_search")],
+        [InlineKeyboardButton("✨ Stylish Text", callback_data="stylish_text")]
     ]
     
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -668,7 +755,7 @@ async def show_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_photo(
             photo=WELCOME_IMAGE,
             caption=(
-                f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
+                f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n🔹 Stylish Text Generator\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
                 f"👤 *User:* {update.effective_user.first_name}\n"
                 f"💰 *Credits:* {user.get('balance', 0)}\n"
                 f"👑 *Premium:* {premium_status}\n\n"
@@ -685,7 +772,7 @@ async def show_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 media=InputMediaPhoto(
                     media=WELCOME_IMAGE,
                     caption=(
-                        f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
+                        f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n🔹 Stylish Text Generator\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
                         f"👤 *User:* {query.from_user.first_name}\n"
                         f"💰 *Credits:* {user.get('balance', 0)}\n"
                         f"👑 *Premium:* {premium_status}\n\n"
@@ -701,7 +788,7 @@ async def show_main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 chat_id=query.from_user.id,
                 photo=WELCOME_IMAGE,
                 caption=(
-                    f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
+                    f"*👋 Welcome to Synax Osnit*\n\npowerful all-in-one bot jo daily useful tools provide karta hai — fast, simple aur user-friendly.\n🔹 Mobile Number Lookup\n🔹 Vehicle Registration Search\n🔹 AI Face Swap\n🔹 Pincode Finder\n🔹 IP Address Lookup\n🔹 Number to Name\n🔹 Instagram Username Info\n🔹 Instagram Reel Downloader\n🔹 Spotify Music Downloader\n🔹 Free Fire Player Info\n🔹 Text to Voice Converter\n🔹 YouTube Video Downloader\n🔹 GST Number Lookup\n🔹 Stylish Text Generator\n\n⚡ Fast • Secure • Easy to Use\n📌 Sab features ek hi bot me\n— Made by @synaxnetwork —\n\n"
                     f"👤 *User:* {query.from_user.first_name}\n"
                     f"💰 *Credits:* {user.get('balance', 0)}\n"
                     f"👑 *Premium:* {premium_status}\n\n"
@@ -1224,6 +1311,28 @@ def format_gst_data(data: dict) -> str:
 
 # ==========================================
 
+# ================= STYLISH TEXT HELPER FUNCTIONS =================
+def generate_stylish_text(text: str, style_index: int = None) -> str:
+    """Generate stylish text with a specific style or all styles"""
+    # Convert to stylish font
+    stylish_text = convert_to_stylish(text)
+    
+    if style_index is not None:
+        # Return text with specific style
+        if 0 <= style_index < len(STYLES):
+            prefix, suffix = STYLES[style_index]
+            return f"{prefix}{stylish_text}{suffix}"
+        else:
+            return stylish_text
+    else:
+        # Return text with all styles
+        result = ""
+        for i, (prefix, suffix) in enumerate(STYLES):
+            result += f"{prefix}{stylish_text}{suffix}\n\n"
+        return result
+
+# ==========================================
+
 # ================= COMMAND HANDLERS =================
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /start command"""
@@ -1565,7 +1674,8 @@ async def get_comprehensive_stats() -> str:
                 "freefire_search": "🔥 Free Fire",
                 "text_to_voice": "🔊 Text to Voice",
                 "youtube_download": "📺 YouTube",
-                "gst_search": "🧾 GST Lookup"
+                "gst_search": "🧾 GST Lookup",
+                "stylish_text": "✨ Stylish Text"
             }
             
             for i, (feature, count) in enumerate(top_features, 1):
@@ -1846,6 +1956,16 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_photo(
             photo=GST_SEARCH_IMAGE,
             caption="🧾 *GST Number Lookup*\n\nPlease send a GST number to search:\n\nExample: `19BOKPS7056D1ZI`",
+            parse_mode="Markdown"
+        )
+    
+    elif data == "stylish_text":
+        # Clear all service states before starting stylish text generation
+        clear_service_states(context)
+        context.user_data["stylish_text_mode"] = STYLISH_TEXT_MODE
+        await query.message.reply_photo(
+            photo=STYLISH_TEXT_IMAGE,
+            caption="✨ *Stylish Text Generator*\n\nPlease send the text you want to convert to stylish text:\n\nExample: `Your Name`\n\nYou'll receive each style in a separate message for easy copying!",
             parse_mode="Markdown"
         )
     
@@ -2504,7 +2624,8 @@ async def show_credit_costs(query, context):
         f"🔥 Free Fire Info: {costs.get('freefire_search', 2)} credits\n"
         f"🔊 Text to Voice: {costs.get('text_to_voice', 1)} credits\n"
         f"📺 YouTube Download: {costs.get('youtube_download', 3)} credits\n"
-        f"🧾 GST Number Lookup: {costs.get('gst_search', 2)} credits\n\n"
+        f"🧾 GST Number Lookup: {costs.get('gst_search', 2)} credits\n"
+        f"✨ Stylish Text Generator: {costs.get('stylish_text', 1)} credits\n\n"
         "Click on any feature below to change its credit cost:"
     )
     
@@ -2524,6 +2645,7 @@ async def show_credit_costs(query, context):
         [InlineKeyboardButton("🔊 Text to Voice", callback_data="credit_cost_text_to_voice")],
         [InlineKeyboardButton("📺 YouTube Download", callback_data="credit_cost_youtube_download")],
         [InlineKeyboardButton("🧾 GST Number Lookup", callback_data="credit_cost_gst_search")],
+        [InlineKeyboardButton("✨ Stylish Text", callback_data="credit_cost_stylish_text")],
         [InlineKeyboardButton("🔙 Back to Admin", callback_data="admin_stats")]
     ]
     
@@ -4618,6 +4740,60 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 caption="❌ Search failed!" + (" Credit refunded." if not is_premium_user(user_id) else "")
             )
             logger.error(f"GST search error: {e}")
+        return
+    
+    # Handle Stylish Text Generator
+    if context.user_data.get("stylish_text_mode") == STYLISH_TEXT_MODE:
+        context.user_data["stylish_text_mode"] = None
+        
+        # Check if user is premium or has enough credits
+        credit_cost = get_credit_cost("stylish_text")
+        if not is_premium_user(user_id):
+            user = get_user(user_id)
+            if user["balance"] < credit_cost:
+                await update.message.reply_photo(
+                    photo=STYLISH_TEXT_IMAGE,
+                    caption=f"❌ Insufficient credits! Stylish text generation requires {credit_cost} credits. Please buy more credits."
+                )
+                return
+            
+            # Deduct credit
+            remove_credits(user_id, credit_cost)
+            # Update statistics
+            update_search_stats("stylish_text", credit_cost)
+        
+        # Convert text to stylish font
+        stylish_text = convert_to_stylish(text)
+        
+        # Send initial message
+        start_msg = await update.message.reply_text(
+            f"✨ *Generating {len(STYLES)} stylish text variations for:* `{text}`\n\n"
+            f"⏳ Please wait, each style will be sent in a separate message for easy copying..."
+        )
+        
+        # Send each style as a separate message
+        for i, (prefix, suffix) in enumerate(STYLES, 1):
+            try:
+                # Create the stylish name
+                styled_name = f"{prefix}{stylish_text}{suffix}"
+                
+                # Send the message with progress
+                await update.message.reply_text(
+                    f"✨ *Style {i}/{len(STYLES)}*\n\n{styled_name}"
+                )
+                
+                # Small delay to avoid rate limiting
+                await asyncio.sleep(0.5)
+                
+            except Exception as e:
+                logger.error(f"Error sending style {i}: {e}")
+                continue
+        
+        # Edit the initial message to show completion
+        await start_msg.edit_text(
+            f"✅ *Generated {len(STYLES)} stylish text variations for:* `{text}`\n\n"
+            f"💰 Remaining Credits: {get_user(user_id)['balance']}" if not is_premium_user(user_id) else "👑 Premium User - Unlimited Generations"
+        )
         return
     
     # Handle payment approval amount

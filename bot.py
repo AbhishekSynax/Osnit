@@ -37,9 +37,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ================= CONFIG =================
-BOT_TOKEN = "8400631140:AAEEyl7sYKZGbuQgfm82Kg6yN9exhKfe8jo"
-ADMIN_ID = 8363262755
-BOT_USERNAME = "SynaxOsnitBot"  # Replace with your bot username
+BOT_TOKEN = "8584147121:AAFuLhdrVzPi1D7zGbE0WKaEF8SfZQCmUH4"
+ADMIN_ID = 6068463116
+BOT_USERNAME = "SynaxInfoBot"  # Replace with your bot username
 
 # File paths
 USERS_FILE = "users.json"
@@ -108,7 +108,7 @@ STYLISH_TEXT_IMAGE = "https://i.ibb.co/gFttkZyy/file-000000009f2c7209b00cf7aecaa
 
 # Force Join Channels (Hardcoded) - CHANGE THESE TO YOUR CHANNELS
 FORCE_JOIN_CHANNELS = [
-    {"id": -1003750507861, "link": "https://t.me/SynaxBotz", "name": "𝘽𝙤𝙩𝙨 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 💚"},
+    {"id": -1002613561003, "link": "https://t.me/Synaxnetwork", "name": "𝘽𝙤𝙩𝙨 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 💚"},
     {"id": -1002682084939, "link": "https://t.me/Synaxchatgroup", "name": "𝘾𝙝𝙖𝙩 𝙂𝙧𝙤𝙪𝙥 💛"}
 ]
 
@@ -156,8 +156,8 @@ STYLES = [
     ("𓄂─⃛𓆩🫧𝆺𝅥⃝𐏓", "㋛𓆪꯭⵿٭🍃"),
     ("◄⏤⃪⃝⃪𐏓🝛꯭", "⸙ꠋꠋꠋꠋꠋ⛦⃪⃪🝛꯭••➤"),
     ("🎡𓆩᪵🌸⃝۫𝞄⃕𝖋𝖋꯭ᜊ𝆺𝅥⃝", "┼⃖ꭗ🦋¦🌺--🎋"),
-    ("⛦⃕𝄟•๋๋๋๋๋๋๋๋๋๋๋๋๋๋๋🦋⃟⃟⃟≛⃝💖", "🦋•๋๋๋๋๋๋๋๋๋๋๋๋๋๋๋𝄟"),
-    ("••ᯓ❥๋๋๋๋๋๋๋๋๋๋๋๋๋๋๋ꗝ༎꯭ࠫ🤍𝆺꯭𝅥", "𝆺꯭𝅥༎ࠫ◡⃝𑲭"),
+    ("⛦⃕𝄟•๋๋๋๋๋๋๋๋๋๋๋๋๋๋🦋⃟⃟⃟≛⃝💖", "🦋•๋๋๋๋๋๋๋๋๋๋๋๋๋๋𝄟"),
+    ("••ᯓ❥๋๋๋๋๋๋๋๋๋๋๋๋ꗝ༎꯭ࠫ🤍𝆺꯭𝅥", "𝆺꯭𝅥༎ࠫ◡⃝𑲭"),
     ("𝐈𝛕ᷟ𝚣⃪ꙴ⋆†།┼⃖•🔥⃞⃪⃜", "🔥⃞⃪⃜𓆪🦋✿"),
     ("❍─⃜𓆩〭⃛〬🤍𓆪˹", ".⍣⃪ꭗ𝆺𝅥𔘓🪽"),
     ("𝆺𝅥اـ꯭ـ꯭𝞂⃕𝝲𝝴꯭•⚚•𝆺꯭𝅥", "𝆺꯭𝅥ꀭ‧₊𝁾⟶🍃˚"),
@@ -652,31 +652,20 @@ def get_required_channels() -> List[dict]:
     """Get list of required channels"""
     return FORCE_JOIN_CHANNELS
 
-async def check_channel_membership(user_id: int, context: ContextTypes.DEFAULT_TYPE, retry_count: int = 0) -> bool:
-    """Check if user is member of all required channels with retry mechanism"""
+async def check_channel_membership(user_id: int, context: ContextTypes.DEFAULT_TYPE) -> bool:
+    """Check if user is member of all required channels"""
     required_channels = get_required_channels()
     
     if not required_channels:
         return True
     
-    # Maximum number of retries
-    max_retries = 2
-    
     for channel in required_channels:
         try:
             member = await context.bot.get_chat_member(channel["id"], user_id)
             if member.status not in ["member", "administrator", "creator"]:
-                # If not a member and we haven't reached max retries, try again after a delay
-                if retry_count < max_retries:
-                    await asyncio.sleep(1)  # Wait 1 second before retrying
-                    return await check_channel_membership(user_id, context, retry_count + 1)
                 return False
         except TelegramError as e:
             logger.error(f"Error checking channel membership: {e}")
-            # If there's an error and we haven't reached max retries, try again
-            if retry_count < max_retries:
-                await asyncio.sleep(1)  # Wait 1 second before retrying
-                return await check_channel_membership(user_id, context, retry_count + 1)
             return False
     
     return True
@@ -1383,17 +1372,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Clear any active service states
     clear_service_states(context)
     
-    # Check channel membership with improved error handling
-    try:
-        is_member = await check_channel_membership(update.effective_user.id, context)
-        if not is_member:
-            await send_force_join_message(update, context)
-            return
-    except Exception as e:
-        logger.error(f"Error checking channel membership in start: {e}")
-        # If there's an error checking membership, try to show the main menu
-        # This prevents users from getting stuck if there's a temporary API issue
-        await show_main_menu(update, context)
+    # Check channel membership
+    if not await check_channel_membership(update.effective_user.id, context):
+        await send_force_join_message(update, context)
         return
     
     # Show main menu
@@ -1753,8 +1734,12 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
     
-    # Handle channel join check callbacks
-    if data in ["check_joined", "refresh_join_status"]:
+    # Check channel membership for most actions
+    if data not in ["check_joined", "refresh_join_status", "admin_"] and not await check_channel_membership(query.from_user.id, context):
+        await send_force_join_message(update, context)
+        return
+    
+    if data == "check_joined":
         # Check which channels the user hasn't joined
         required_channels = get_required_channels()
         not_joined = []
@@ -1772,25 +1757,17 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not not_joined:
             await query.answer("✅ Thank you for joining all channels!", show_alert=True)
             await show_main_menu(update, context)
-            return
         else:
             await query.answer(f"❌ You haven't joined {len(not_joined)} channel(s) yet!", show_alert=True)
             # Update the join message
             await send_force_join_message(update, context)
-            return
     
-    # Check channel membership for most actions (with improved error handling)
-    try:
-        is_member = await check_channel_membership(query.from_user.id, context)
-        if not is_member and data not in ["admin_", "maintenance_", "check_joined", "refresh_join_status"]:
-            await send_force_join_message(update, context)
-            return
-    except Exception as e:
-        logger.error(f"Error checking channel membership in callback: {e}")
-        # If there's an error checking membership, allow the action to proceed
-        # This prevents users from getting stuck if there's a temporary API issue
+    elif data == "refresh_join_status":
+        # Refresh the join status
+        await send_force_join_message(update, context)
+        await query.answer("🔄 Status refreshed!", show_alert=True)
     
-    if data == "copy_referral":
+    elif data == "copy_referral":
         # Copy referral link to clipboard
         user_id = str(query.from_user.id)
         referral_link = get_referral_link(user_id)
@@ -5350,7 +5327,7 @@ def main():
     application.add_error_handler(error_handler)
     
     # Start bot
-    print("🤖 Bme aake leave krke bot use kre to usko phir se channel join hone bole aur baki kuchot is running...")
+    print("🤖 Bot is running...")
     application.run_polling()
 
 if __name__ == "__main__":

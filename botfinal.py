@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 
 # ================= CONFIG =================
 BOT_TOKEN = "8400631140:AAEEyl7sYKZGbuQgfm82Kg6yN9exhKfe8jo"
-ADMIN_ID = 8363262755
+ADMIN_ID = 6068463116
 BOT_USERNAME = "SynaxLookupBot"  # Replace with your bot username
 
 # File paths

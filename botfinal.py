@@ -38,8 +38,8 @@ logger = logging.getLogger(__name__)
 
 # ================= CONFIG =================
 BOT_TOKEN = "8400631140:AAEEyl7sYKZGbuQgfm82Kg6yN9exhKfe8jo"
-ADMIN_ID = 7998441787
-BOT_USERNAME = "SynaxOsnitBot"  # Replace with your bot username
+ADMIN_ID = 8363262755
+BOT_USERNAME = "SynaxLookupBot"  # Replace with your bot username
 
 # File paths
 USERS_FILE = "users.json"

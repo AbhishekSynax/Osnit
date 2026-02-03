@@ -108,7 +108,7 @@ STYLISH_TEXT_IMAGE = "https://i.ibb.co/gFttkZyy/file-000000009f2c7209b00cf7aecaa
 
 # Force Join Channels (Hardcoded) - CHANGE THESE TO YOUR CHANNELS
 FORCE_JOIN_CHANNELS = [
-    {"id": -1002613561003, "link": "https://t.me/Synaxnetwork", "name": "𝘽𝙤𝙩𝙨 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 💚"},
+    {"id": -1003750507861, "link": "https://t.me/SynaxBotz", "name": "𝘽𝙤𝙩𝙨 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 💚"},
     {"id": -1002682084939, "link": "https://t.me/Synaxchatgroup", "name": "𝘾𝙝𝙖𝙩 𝙂𝙧𝙤𝙪𝙥 💛"}
 ]
 

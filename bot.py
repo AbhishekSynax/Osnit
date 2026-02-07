@@ -108,7 +108,7 @@ JOIN_IMAGE = "https://i.ibb.co/sdrfRLJd/file-00000000cb987208926a77979a9c0338.pn
 MAINTENANCE_IMAGE = "https://i.ibb.co/twKv01yL/71-Ugwa-C4-Dj-L-AC-UF1000-1000-QL80.jpg"  # Maintenance mode image
 GST_SEARCH_IMAGE = "https://i.ibb.co/W4gzyjWq/file-00000000832c71f89eced99428ebf79b.png"  # Image for GST Number Lookup
 STYLISH_TEXT_IMAGE = "https://i.ibb.co/gFttkZyy/file-000000009f2c7209b00cf7aecaa187a6-1.png"  # Image for Stylish Text Generator
-AADHAR_FAMILY_IMAGE = "https://i.ibb.co/BKz7Fd6d/file-00000000dbbc720981088ca9d3eafa5b.png"  # Image for Aadhar to Family Info
+AADHAR_FAMILY_IMAGE = "https://i.ibb.co/qMBPM6N0/information-retrieval-c.jpg"  # Image for Aadhar to Family Info
 
 # Force Join Channels (Hardcoded) - CHANGE THESE TO YOUR CHANNELS
 FORCE_JOIN_CHANNELS = [

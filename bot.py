@@ -53,7 +53,7 @@ GROUPS_FILE = "groups.json"  # New file for group management
 
 # API Configuration
 API_KEY = "anshapi"  # Updated API key
-API_URL = "https://sh1vam-api-num.netlify.app/.netlify/functions/numberinfo?num="  # Updated API URL
+API_URL = "https://zionix.xo.je/znnum?number="  # Updated API URL
 VEHICLE_API_URL = "https://revangevichelinfo.vercel.app/api/rc"
 # Face Swap API
 FACE_SWAP_API_URL = "https://ab-faceswap.vercel.app/swap"
@@ -1976,22 +1976,22 @@ async def number_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # Extract data with defaults
                 mobile = data.get("mobile", "N/A")
                 name = data.get("name", "N/A")
-                father_name = data.get("father_name", "N/A")
+                father_name = data.get("fname", "N/A")
                 address = data.get("address", "N/A")
-                alt_mobile = data.get("alt_mobile", "N/A")
+                alt_mobile = data.get("alt", "N/A")
                 circle = data.get("circle", "N/A")
-                id_number = data.get("id_number", "N/A")
+                id_number = data.get("id", "N/A")
                 email = data.get("email", "N/A")
                 
                 result_text = (
                     f"✅ *Number Search Result*\n\n"
                     f"📱 Mobile: `{mobile}`\n"
                     f"👤 Name: {name}\n"
-                    f"👨 Father: {father_name}\n"
+                    f"👨 Father: {fname}\n"
                     f"🏠 Address: {address}\n"
-                    f"📞 Alt Mobile: {alt_mobile}\n"
+                    f"📞 Alt Mobile: {alt}\n"
                     f"📡 Circle: {circle}\n"
-                    f"🆔 ID: {id_number}\n"
+                    f"🆔 ID: {id}\n"
                     f"📧 Email: {email}\n\n"
                 )
                 
@@ -5110,22 +5110,22 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     # Extract data with defaults
                     mobile = data.get("mobile", "N/A")
                     name = data.get("name", "N/A")
-                    father_name = data.get("father_name", "N/A")
+                    fname = data.get("fname", "N/A")
                     address = data.get("address", "N/A")
-                    alt_mobile = data.get("alt_mobile", "N/A")
+                    alt = data.get("alt", "N/A")
                     circle = data.get("circle", "N/A")
-                    id_number = data.get("id_number", "N/A")
+                    id = data.get("id", "N/A")
                     email = data.get("email", "N/A")
                     
                     result_text = (
                         f"✅ *Search Result*\n\n"
                         f"📱 Mobile: `{mobile}`\n"
                         f"👤 Name: {name}\n"
-                        f"👨 Father: {father_name}\n"
+                        f"👨 Father: {fname}\n"
                         f"🏠 Address: {address}\n"
-                        f"📞 Alt Mobile: {alt_mobile}\n"
+                        f"📞 Alt Mobile: {alt}\n"
                         f"📡 Circle: {circle}\n"
-                        f"🆔 ID: {id_number}\n"
+                        f"🆔 ID: {id}\n"
                         f"📧 Email: {email}\n\n"
                     )
                     
